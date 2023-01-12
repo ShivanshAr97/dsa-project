@@ -1,3 +1,5 @@
+// It is necessary to end the program by pressing 5 otherwise the results will not be reflected in the file
+
 #include<stdio.h>
 #include<malloc.h>
 #include<string.h>
@@ -107,11 +109,11 @@ void print_all_tasks(Todo *td)
 	int i;
 	for(i=0;i<td->totalTask;i++)
 	{
-		printf("-----Task%d------\n",i+1);
-		printf(" Task : %s\n",(td->tasks[i].task));
-		printf(" Time : %s\n",td->tasks[i].time);
-		printf(" Status : %s\n",strcmp(td->tasks[i].done,"1")?"Undone":"Done");
-		printf("----------------\n");
+		printf("\n-----Task %d------\n",i+1);
+		printf(" Task: %s\n",(td->tasks[i].task));
+		printf(" Time: %s\n",td->tasks[i].time);
+		printf(" Status: %s\n",strcmp(td->tasks[i].done,"1")?"Undone":"Done");
+		printf("----------------\n\n");
 	}
 }
 
@@ -215,17 +217,17 @@ int main()
 	while(1)
 	{     
 		printf("* * * * * * * * * * * * * * * * * * * * * * * *\n");
-		printf("*       Press 1 to View all the tasks         *\n*       Press 2 to Filter tasks               *\n*       Press 3 to Insert a new task          *\n*       Press 4 to Delete existing task       *\n*       Press 5 to exit                       *\n");
+		printf("*       Press 1 to Insert a new task          *\n*       Press 2 to View all the tasks         *\n*       Press 3 to Filter tasks               *\n*       Press 4 to Delete existing task       *\n*       Press 5 to exit                       *\n");
 		printf("* * * * * * * * * * * * * * * * * * * * * * * *\n");
 		scanf("%d",&temp);
 		switch(temp)
 		{
-			case 1:
+			case 2:
 				print_all_tasks(&td1);
 				break;
 			FILTER_BREAKPOINT:
-			case 2:
-				printf("Press 1 to check completed tasks\nPress 0 to check incompleted tasks\n");
+			case 3:
+				printf("Press 0 to check incompleted tasks\nPress 1 to check completed tasks\n");
 				scanf("%d",&temp2);
 				if(temp2==0)
 					filter_status(&td1,0);
@@ -234,7 +236,7 @@ int main()
 				else
 					goto FILTER_BREAKPOINT;
 				break;
-			case 3:
+			case 1:
 				fflush(stdin);
 				printf("Enter the task title: ");
 				gets(taskTemp.task);
@@ -262,7 +264,7 @@ int main()
 		}
 	}
 	OUTOFLOOP:
-	printf("\n* THANKS FOR USING TODO'S APP 😊*\n");
+	printf("\n* * * THANKS FOR USING TODO'S APP * * *\n");
 	fclose(ptr);
 	return 0;
 }

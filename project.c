@@ -108,9 +108,9 @@ void print_all_tasks(Todo *td)
 	for(i=0;i<td->totalTask;i++)
 	{
 		printf("-----Task%d------\n",i+1);
-		printf(" Task : %s\n",td->tasks[i].task);
+		printf(" Task : %s\n",(td->tasks[i].task));
 		printf(" Time : %s\n",td->tasks[i].time);
-		printf(" Status : %s\n",strcmp(td->tasks[i].done,"1")?"UnDone":"Done");
+		printf(" Status : %s\n",strcmp(td->tasks[i].done,"1")?"Undone":"Done");
 		printf("----------------\n");
 	}
 }
@@ -151,7 +151,7 @@ void print_specific(Task *ptr)
 		printf("----------------\n");
 		printf("Task : %s\n",ptr->task);
 		printf("Time : %s\n",ptr->time);
-		printf("Status : %s\n",strcmp(ptr->done,"1")?"UnDone":"Done");
+		printf("Status : %s\n",strcmp(ptr->done,"1")?"Undone":"Done");
 		printf("----------------\n");
 }
 
@@ -207,16 +207,16 @@ int main()
 	FILE *ptr;
 	int temp,temp2;
 	char tempc[30],nameFile[30];
-	printf("Enter the name of the file : ");
+	printf("Enter the name of the file: ");
 	gets(nameFile);
 	ptr=fopen(nameFile,"a+");
 	initialize_data(&td1,ptr);
-	printf("\n-------THE DAILY TODOS APP-------\n");
+	printf("\n--------------THE DAILY TODOS APP--------------\n");
 	while(1)
 	{     
-		printf("* * * * * * * * * * * * * * * * * * * *\n");
-		printf("*      Press 1 to View all Tasks      *\n*      Press 2 to Filter Tasks        *\n*      Press 3 to Insert Task         *\n*      Press 4 to delete task         *\n*      Press 5 to Exit                *\n");
-		printf("* * * * * * * * * * * * * * * * * * * *\n");
+		printf("* * * * * * * * * * * * * * * * * * * * * * * *\n");
+		printf("*       Press 1 to View all the tasks         *\n*       Press 2 to Filter tasks               *\n*       Press 3 to Insert a new task          *\n*       Press 4 to Delete existing task       *\n*       Press 5 to exit                       *\n");
+		printf("* * * * * * * * * * * * * * * * * * * * * * * *\n");
 		scanf("%d",&temp);
 		switch(temp)
 		{
@@ -225,7 +225,7 @@ int main()
 				break;
 			FILTER_BREAKPOINT:
 			case 2:
-				printf(" Press 1 to check complete Tasks\n Press 0 to check Incompleted Tasks\n");
+				printf("Press 1 to check completed tasks\nPress 0 to check incompleted tasks\n");
 				scanf("%d",&temp2);
 				if(temp2==0)
 					filter_status(&td1,0);
@@ -236,37 +236,33 @@ int main()
 				break;
 			case 3:
 				fflush(stdin);
-				printf(" Enter the Task Title : ");
+				printf("Enter the task title: ");
 				gets(taskTemp.task);
-				printf(" Enter the Time in 24 hours Format : ");
+				printf("Enter the time in 24 hours format (HH:MM:SS): ");
 				gets(taskTemp.time);
-				printf(" Enter status -> 0 for incomplete, 1 for complete : ");
+				printf("Enter status -> 0 for incomplete, 1 for complete: ");
 				gets(taskTemp.done);
 				insert(ptr,&taskTemp,&td1);
-				printf(" Task Inserted \n");
+				printf("Task Inserted !!\n\n");
 				break;
 			case 4:
 				fflush(stdin);
-				printf("Enter the Title of task to delete : ");
+				printf("Enter the title of the task to be deleted: ");
 				gets(tempc);
 				if(delete_task(ptr,&td1,tempc,nameFile))
 					printf("\nTask Deleted \n");
 				else
-					printf("\nTask Not Present\n");
+					printf("\nTask Absent\n");
 				break;
 			case 5:
 				goto OUTOFLOOP;
 			default:
-				printf(" Wrong Input ! Try Again :-) \n");	
+				printf("Wrong Input! Try Again\n");	
 				
 		}
 	}
 	OUTOFLOOP:
-	printf("\n* THANKS FOR USING AP TODO'S *\n");
+	printf("\n* THANKS FOR USING TODO'S APP 😊*\n");
 	fclose(ptr);
 	return 0;
 }
-
-/*
-	NOTE -> Still Time Validation has to be done!
-*/
